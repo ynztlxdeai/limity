@@ -17,6 +17,18 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                //cppFlags ""
+                def custom_flags = ""
+                if (limitTime == "true") {
+                    // 定义limit_time宏表示过期时间，在代码中使用这个宏进行判断
+                    custom_flags += " -DLUOXIANG_LIMIT_TIME=" + limit_Time()
+                }
+                cppFlags custom_flags
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
     }
 
     buildTypes {
@@ -26,9 +38,8 @@ android {
         }
     }
     externalNativeBuild {
-        ndkBuild {
-            // Application.mk in the same directory will be used automatically
-            path 'Android.mk'
+        cmake {
+            path "CMakeLists.txt"
         }
     }
 

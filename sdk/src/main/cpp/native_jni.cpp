@@ -1,6 +1,6 @@
 #include <jni.h>
-#include <string>
-#include <limit_ability.h>
+#include <string.h>
+#include "limit_ability.h"
 
 extern "C" {
 
